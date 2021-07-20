@@ -2,6 +2,7 @@ import { getDiscordInstance } from './DiscordClient';
 import fs from 'fs/promises';
 import { IMAGES_PATH } from './Constants';
 import path from 'path';
+import { Log } from './Log';
 
 export default async function postPuzzle(): Promise<void> {
   const discord = getDiscordInstance();
@@ -25,6 +26,9 @@ export default async function postPuzzle(): Promise<void> {
   const dates = Object.keys(puzzles);
   dates.sort();
   const puzzleIndex = dates.indexOf(puzzleDate);
+  if (puzzleIndex === -1) {
+    Log.error('Puzzle date not found');
+  }
   const previousDate = dates[puzzleIndex - 1];
   let text = '!notify zomerpuzzel\n\n';
   if (previousDate) {
