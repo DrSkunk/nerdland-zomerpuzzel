@@ -1,5 +1,4 @@
 import { Message } from 'discord.js';
-import postPuzzle from '../PostPuzzle';
 import { Command } from '../types/Command';
 
 const command: Command = {
@@ -13,6 +12,5 @@ const command: Command = {
 
 async function execute(msg: Message): Promise<void> {
   msg.reply(`Pong! \`${Date.now() - msg.createdTimestamp}ms\``);
-  postPuzzle();
 }
 export = command;

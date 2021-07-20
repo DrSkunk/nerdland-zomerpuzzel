@@ -1,6 +1,5 @@
 import { getDiscordInstance } from './DiscordClient';
 import fs from 'fs/promises';
-import puzzles from '../assets/puzzles.json';
 import { IMAGES_PATH } from './Constants';
 import path from 'path';
 
@@ -18,6 +17,11 @@ export default async function postPuzzle(): Promise<void> {
     })
     .split(' ')[0]
     .replace(/\//g, '-');
+
+  const puzzles = JSON.parse(
+    await fs.readFile(path.resolve('./assets/puzzles.json'), 'utf-8')
+  );
+
   const dates = Object.keys(puzzles);
   dates.sort();
   const puzzleIndex = dates.indexOf(puzzleDate);
