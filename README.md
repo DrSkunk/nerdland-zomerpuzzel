@@ -13,7 +13,7 @@ Bekijk het `help` commando voor alle opties.
 
 Dit vereist een [NodeJS](https://nodejs.org/en/) installatie.
 
-Clone `one-night-ultimate-discord` in een folder en `cd` er in. Voer het commando `npm install` uit om alle dependencies te installeren.
+Clone `nerdland-zomerpuzzel` in een folder en `cd` er in. Voer het commando `npm install` uit om alle dependencies te installeren.
 
 Om de applicatie te starten, na het instellen van alle configuratie, voer `npm start` uit.
 

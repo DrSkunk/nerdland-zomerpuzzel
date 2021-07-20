@@ -17,9 +17,9 @@ async function execute(msg: Message): Promise<void> {
 
   embed.setTitle('Nerdland Zomerpuzzel');
   embed.setDescription(
-    'Ga naar https://github.com/DrSkunk/one-night-ultimate-discord voor de broncode te bekijken.'
+    'Ga naar https://github.com/DrSkunk/nerdland-zomerpuzzel voor de broncode te bekijken.'
   );
-  embed.setURL('https://github.com/DrSkunk/one-night-ultimate-discord');
+  embed.setURL('https://github.com/DrSkunk/nerdland-zomerpuzzel');
 
   client.commands.forEach((command) => {
     let description = command.description;
