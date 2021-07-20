@@ -1,6 +1,6 @@
 {
   "name": "nerdland-zomerpuzzel",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Post a new puzzel daily in Discord.",
   "main": "index.js",
   "scripts": {
