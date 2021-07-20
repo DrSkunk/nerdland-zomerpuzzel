@@ -5,6 +5,8 @@ import path from 'path';
 import { Log } from './Log';
 
 export default async function postPuzzle(): Promise<void> {
+  Log.log('Posting puzzle');
+
   const discord = getDiscordInstance();
   const images = (await fs.readdir(IMAGES_PATH)).filter((file) =>
     file.endsWith('.jpg')
@@ -28,6 +30,13 @@ export default async function postPuzzle(): Promise<void> {
   const puzzleIndex = dates.indexOf(puzzleDate);
   if (puzzleIndex === -1) {
     Log.error('Puzzle date not found');
+    discord.sendMessage('Laatste puzzel werd niet gevonden.', {});
+    return;
+  }
+  if (!images[puzzleIndex]) {
+    Log.error('Puzzle image not found');
+    discord.sendMessage('Puzzel afbeelding werd niet gevonden.', {});
+    return;
   }
   const previousDate = dates[puzzleIndex - 1];
   let text = '!notify zomerpuzzel\n\n';
