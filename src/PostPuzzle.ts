@@ -13,7 +13,6 @@ export default async function postPuzzle(): Promise<void> {
   );
   const puzzleDate = new Date()
     .toLocaleString('zh-cn', {
-      timeZone: 'Europe/Brussels',
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',

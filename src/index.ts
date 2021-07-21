@@ -22,4 +22,4 @@ initDiscord(config.DiscordToken);
 const discordClient = getDiscordInstance();
 discordClient.start();
 
-cron.schedule('0 0 * * *', postPuzzle, { timezone: 'Europe/Brussels' });
+cron.schedule('0 0 * * *', postPuzzle);
