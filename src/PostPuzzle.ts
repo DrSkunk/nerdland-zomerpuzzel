@@ -29,12 +29,12 @@ export default async function postPuzzle(): Promise<void> {
   const puzzleIndex = dates.indexOf(puzzleDate);
   if (puzzleIndex === -1) {
     Log.error('Puzzle date not found');
-    discord.sendMessage('Laatste puzzel werd niet gevonden.', {});
+    discord.sendMessage('Laatste puzzel werd niet gevonden.');
     return;
   }
   if (!images[puzzleIndex]) {
     Log.error('Puzzle image not found');
-    discord.sendMessage('Puzzel afbeelding werd niet gevonden.', {});
+    discord.sendMessage('Puzzel afbeelding werd niet gevonden.');
     return;
   }
   const previousDate = dates[puzzleIndex - 1];
@@ -47,7 +47,8 @@ export default async function postPuzzle(): Promise<void> {
   text += `Puzzel #${puzzleIndex + 1}:`;
   const imagePath = path.join(IMAGES_PATH, images[puzzleIndex]);
 
-  await discord.sendMessage(text, {
+  await discord.sendMessage({
+    content: text,
     files: [
       {
         attachment: imagePath,

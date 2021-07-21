@@ -26,6 +26,6 @@ async function execute(msg: Message): Promise<void> {
     'https://i.imgur.com/RPKkHMf.png'
   );
 
-  await msg.channel.send(embed);
+  await msg.channel.send({ embeds: [embed] });
 }
 export = command;

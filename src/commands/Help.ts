@@ -45,6 +45,8 @@ async function execute(msg: Message): Promise<void> {
     'https://i.imgur.com/RPKkHMf.png'
   );
   const textChannel = msg.channel as TextChannel;
-  textChannel.send(embed);
+  textChannel.send({
+    embeds: [embed],
+  });
 }
 export = command;

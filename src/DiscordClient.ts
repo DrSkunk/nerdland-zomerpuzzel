@@ -1,4 +1,4 @@
-import Discord, { TextChannel } from 'discord.js';
+import Discord, { Intents, TextChannel } from 'discord.js';
 import glob from 'glob';
 import { promisify } from 'util';
 import { Prefix, TextChannelId } from './Config';
@@ -18,7 +18,9 @@ class DiscordClient {
 
   constructor(token: string) {
     this._token = token;
-    this._client = new Discord.Client();
+    this._client = new Discord.Client({
+      intents: [Intents.FLAGS.GUILD_MESSAGES],
+    });
     this._commands = [];
   }
 
@@ -26,12 +28,14 @@ class DiscordClient {
     this._client.on('ready', async () => {
       Log.info(`Logged in!`);
       if (this._client.user) {
-        this._client.user
-          .setActivity(`${Prefix}help`, { type: 'LISTENING' })
-          .then((presence) =>
-            Log.info(`Activity set to ${presence.activities[0].name}`)
-          )
-          .catch(Log.error);
+        try {
+          const presence = this._client.user.setActivity(`${Prefix}help`, {
+            type: 'LISTENING',
+          });
+          Log.info(`Activity set to ${presence.activities[0].name}`);
+        } catch (error) {
+          Log.error(error);
+        }
       }
       const commandFiles = await globPromise(`${__dirname}/commands/*.{js,ts}`);
 
@@ -55,7 +59,7 @@ class DiscordClient {
       const command = this._commands.find((c) => c.names.includes(commandName));
 
       if (command) {
-        const isAdmin = message.member?.hasPermission('ADMINISTRATOR');
+        const isAdmin = message.member?.permissions.has('ADMINISTRATOR');
         if (command.adminOnly && !isAdmin) {
           message.reply('This command is for admins only');
         } else {
@@ -72,7 +76,7 @@ class DiscordClient {
 
   public async sendMessage(...args: Parameters<typeof channel.send>) {
     const channel = (await this._client.channels.fetch(
-      TextChannelId
+      `${BigInt(TextChannelId)}`
     )) as TextChannel;
     await channel.send(...args);
   }
