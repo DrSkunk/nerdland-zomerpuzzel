@@ -39,7 +39,8 @@ export default async function postPuzzle(): Promise<void> {
     return;
   }
   const previousDate = dates[puzzleIndex - 1];
-  let text = '!notify zomerpuzzel\n\n';
+  // let text = '!notify zomerpuzzel\n\n';
+  let text = '';
   if (previousDate) {
     const previousAnswer = (puzzles as Record<string, string>)[previousDate];
     text += `Antwoord van Puzzel #${puzzleIndex}: ||${previousAnswer}||\n\n`;
